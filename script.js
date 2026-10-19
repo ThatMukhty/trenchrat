@@ -41,12 +41,13 @@ const chompText = document.getElementById('chompText');
 btnConnectWallet.addEventListener('click', () => walletModal.style.display = 'flex');
 btnCloseModal.addEventListener('click', () => walletModal.style.display = 'none');
 
-// Multi-Wallet Click Handler
+// Multi-Wallet Click Handler with Correct Individual Deep Links
 document.querySelectorAll('.wallet-option').forEach(btn => {
   btn.addEventListener('click', async (e) => {
     walletModal.style.display = 'none';
     const walletType = e.target.getAttribute('data-wallet');
 
+    // If desktop extension exists, connect directly
     if (window.ethereum) {
       try {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -58,21 +59,38 @@ document.querySelectorAll('.wallet-option').forEach(btn => {
         btnConnectWallet.innerText = "CONNECTED";
 
         await verifyOnChainHolding();
+        return;
       } catch (err) {
-        alert("Wallet error: " + err.message);
+        console.warn("Extension connection skipped or failed, using deep link handler...");
       }
-    } else {
-      const targetHost = encodeURIComponent(window.location.href);
-      if (walletType === 'metamask') {
-        window.open(`https://metamask.app.link/dapp/${targetHost}`, '_blank');
-      } else if (walletType === 'coinbase') {
-        window.open(`https://go.cb-w.com/dapp?cb_url=${targetHost}`, '_blank');
-      } else if (walletType === 'trust') {
-        window.open(`https://link.trustwallet.com/open_url?coin_id=60&url=${targetHost}`, '_blank');
-      } else {
-        alert("No extension detected. Opening mobile browser link...");
-        window.open(`https://metamask.app.link/dapp/${targetHost}`, '_blank');
-      }
+    }
+
+    // Mobile / Desktop Browser Deep Link Routing (Specific to each wallet choice)
+    const targetHost = window.location.href.replace(/^https?:\/\//, '');
+
+    if (walletType === 'metamask') {
+      window.open(`https://metamask.app.link/dapp/${targetHost}`, '_blank');
+    } 
+    else if (walletType === 'coinbase') {
+      window.open(`https://go.cb-w.com/dapp?cb_url=${encodeURIComponent(window.location.href)}`, '_blank');
+    } 
+    else if (walletType === 'trust') {
+      window.open(`https://link.trustwallet.com/open_url?coin_id=60&url=${encodeURIComponent(window.location.href)}`, '_blank');
+    } 
+    else if (walletType === 'rainbow') {
+      window.open(`https://rnbw.app/dapp?url=${encodeURIComponent(window.location.href)}`, '_blank');
+    } 
+    else if (walletType === 'phantom') {
+      window.open(`https://phantom.app/ul/browse/${encodeURIComponent(window.location.href)}`, '_blank');
+    } 
+    else if (walletType === 'zerion') {
+      window.open(`https://zerion.io/dl/dapp/${encodeURIComponent(window.location.href)}`, '_blank');
+    } 
+    else if (walletType === 'rabby') {
+      alert("Please install Rabby Browser Extension on desktop to connect.");
+    } 
+    else if (walletType === 'robinhood') {
+      window.open(`https://robinhood.com/wallet?url=${encodeURIComponent(window.location.href)}`, '_blank');
     }
   });
 });
@@ -80,7 +98,6 @@ document.querySelectorAll('.wallet-option').forEach(btn => {
 // Buy / Feed Action
 btnFeedRat.addEventListener('click', () => {
   if (TOKEN_CONTRACT_ADDRESS !== "0x0000000000000000000000000000000000000000") {
-    // Open Uniswap pre-loaded with token contract
     window.open(`https://app.uniswap.org/#/swap?outputCurrency=${TOKEN_CONTRACT_ADDRESS}`, '_blank');
   } else {
     alert("Token contract is not launched yet! Replace TOKEN_CONTRACT_ADDRESS in script.js once deployed.");
@@ -103,7 +120,6 @@ async function verifyOnChainHolding() {
 
     const fetchedBalance = parseFloat(ethers.utils.formatUnits(rawBalance, decimals));
 
-    // Check if user just bought more tokens -> Trigger Eating Animation!
     if (previousTokenBalance > 0 && fetchedBalance > previousTokenBalance) {
       const addedTokens = (fetchedBalance - previousTokenBalance).toFixed(0);
       triggerEatingAnimation(addedTokens);
@@ -112,7 +128,6 @@ async function verifyOnChainHolding() {
     previousTokenBalance = fetchedBalance;
     tokenBalance = fetchedBalance;
 
-    // Fetch Live DexScreener Price
     const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${TOKEN_CONTRACT_ADDRESS}`);
     const data = await res.json();
     if (data.pairs && data.pairs.length > 0) {
