@@ -242,3 +242,42 @@ document.getElementById('btnShare').addEventListener('click', () => {
 
 // Initial Render
 updateDashboardUI();
+// CA Copy & Robinhood Action Handlers
+const btnCopyCA = document.getElementById('btnCopyCA');
+const btnOpenRobinhood = document.getElementById('btnOpenRobinhood');
+
+if (btnCopyCA) {
+  btnCopyCA.addEventListener('click', () => {
+    // Copy the token contract address
+    navigator.clipboard.writeText(TOKEN_CONTRACT_ADDRESS).then(() => {
+      btnCopyCA.innerText = "COPIED! 🧀";
+      btnCopyCA.style.background = "#84cc16";
+
+      // Show the Robinhood redirection button immediately!
+      if (btnOpenRobinhood) {
+        btnOpenRobinhood.style.display = "block";
+      }
+
+      setTimeout(() => {
+        btnCopyCA.innerText = "COPY CA 📋";
+        btnCopyCA.style.background = "#eab308";
+      }, 3000);
+    }).catch(err => {
+      console.error("Failed to copy:", err);
+    });
+  });
+}
+
+// Redirect to Robinhood App / Web
+if (btnOpenRobinhood) {
+  btnOpenRobinhood.addEventListener('click', () => {
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isMobile) {
+      // Deep link to Robinhood Wallet App
+      window.location.href = "https://wallet.robinhood.com/";
+    } else {
+      // Desktop fallback to Robinhood Crypto Web
+      window.open("https://robinhood.com/us/en/about/crypto/", "_blank");
+    }
+  });
+}

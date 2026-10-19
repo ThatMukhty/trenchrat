@@ -14,12 +14,26 @@
    <!-- Header Banner -->
 <div class="trench-banner">
   <h1 class="main-title">TRENCH RAT</h1>
-  <p class="tagline">WELCOME TO THE SEWER • FEED ME OR I'LL DIE</p>
-  
-  <!-- Contract Address Copy Bar -->
-  <div class="ca-box" style="margin-top: 10px; display: flex; justify-content: center; align-items: center; gap: 8px;">
-    <span id="caText" style="font-family: monospace; font-size: 0.85rem; color: #00ff66; background: rgba(0,0,0,0.6); padding: 6px 10px; border-radius: 3px; border: 1px solid #00ff66;">0x0000000000000000000000000000000000000000</span>
-    <button id="btnCopyCA" style="padding: 6px 12px; background: #00ff66; color: #000; border: none; font-weight: bold; cursor: pointer; border-radius: 3px;">COPY CA 📋</button>
+  <p class="tagline">ONLY THE TOKEN CAN SAVE ME OR ELSE I'LL DIE AND MY BLOOD IS ON YOUR HANDS 🩸🐀</p>
+
+  <!-- Gold Inline CA Box & Action Buttons -->
+  <div class="ca-container" style="margin-top: 15px; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; max-width: 380px; margin-left: auto; margin-right: auto;">
+    
+    <div style="background: rgba(0,0,0,0.8); border: 1px solid #eab308; padding: 8px 12px; border-radius: 6px; font-family: monospace; font-size: 0.8rem; color: #eab308; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; box-sizing: border-box;" id="caText">
+      0x0000000000000000000000000000000000000000
+    </div>
+
+    <div style="display: flex; gap: 8px; width: 100%;">
+      <button id="btnCopyCA" style="flex: 1; background: #eab308; color: #000; border: none; padding: 8px 12px; font-weight: bold; border-radius: 6px; cursor: pointer; font-family: inherit;">
+        COPY CA 📋
+      </button>
+
+      <!-- Robinhood Quick-Redirect Button -->
+      <button id="btnOpenRobinhood" style="flex: 1; background: #22c55e; color: #000; border: none; padding: 8px 12px; font-weight: bold; border-radius: 6px; cursor: pointer; font-family: inherit; display: none;">
+        OPEN ROBINHOOD 🏹
+      </button>
+    </div>
+
   </div>
 </div>
 
