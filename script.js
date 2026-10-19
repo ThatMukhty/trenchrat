@@ -25,7 +25,23 @@ const walletModal = document.getElementById('walletModal');
 const btnConnectWallet = document.getElementById('btnConnectWallet');
 const btnCloseModal = document.getElementById('btnCloseModal');
 const walletAddressDisplay = document.getElementById('walletAddressDisplay');
-
+// Auto-Reconnect when loaded inside mobile dApp browser (MetaMask, Robinhood, Phantom, etc.)
+document.addEventListener("DOMContentLoaded", async () => {
+  if (window.ethereum) {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const accounts = await provider.listAccounts();
+      if (accounts && accounts.length > 0) {
+        userWalletAddress = accounts[0];
+        walletAddressDisplay.innerText = `Connected: ${userWalletAddress.substring(0,6)}...${userWalletAddress.substring(38)}`;
+        btnConnectWallet.innerText = "CONNECTED";
+        await verifyOnChainHolding();
+      }
+    } catch (err) {
+      console.log("Auto-connect check skipped:", err);
+    }
+  }
+});
 const statTokens = document.getElementById('statTokens');
 const statPnl = document.getElementById('statPnl');
 const ratImage = document.getElementById('ratImage');
@@ -90,8 +106,8 @@ document.querySelectorAll('.wallet-option').forEach(btn => {
       alert("Please install Rabby Browser Extension on desktop to connect.");
     } 
     else if (walletType === 'robinhood') {
-      window.open(`https://robinhood.com/wallet?url=${encodeURIComponent(window.location.href)}`, '_blank');
-    }
+  window.open(`https://wallet.robinhood.com/ul/browse/${encodeURIComponent(window.location.href)}`, '_blank');
+}
   });
 });
 
