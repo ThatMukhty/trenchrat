@@ -430,3 +430,73 @@ canvas {
   0%, 100% { opacity: 0.3; transform: scaleX(0.8); }
   50% { opacity: 1; transform: scaleX(1); }
 }
+/* --- DESKTOP CONTAINMENT & RAT ANIMATIONS --- */
+
+/* 1. Tagline Contrast Fix */
+.trench-banner .tagline {
+  color: #eab308 !important; /* Bright gold for immediate readability */
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(234, 179, 8, 0.4);
+}
+
+/* 2. Desktop Responsive Layout (Safe for Mobile) */
+@media (min-width: 768px) {
+  .sewer-frame {
+    max-width: 520px; /* Gives desktop users a clean, balanced layout */
+    margin: 40px auto;
+  }
+
+  /* Animated Rats inside the Left and Right Pipes */
+  .sewer-frame::before {
+    content: "🐀";
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 10px;
+    animation: ratRunDown 6s infinite linear;
+  }
+
+  .sewer-frame::after {
+    content: "🐀";
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 10px;
+    animation: ratRunUp 8s infinite linear;
+  }
+}
+
+/* Vertical Pipe Movement Keyframes */
+@keyframes ratRunDown {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(500px);
+    opacity: 0;
+  }
+}
+
+@keyframes ratRunUp {
+  0% {
+    transform: translateY(500px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
