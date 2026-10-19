@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trench Rat - Sewer DApp</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Sewer Trench Outer Frame -->
+  <div class="sewer-frame">
+    
+    <!-- Header Banner -->
+    <div class="trench-banner">
+      <h1 class="main-title">TRENCH RAT</h1>
+      <p class="tagline">WELCOME TO THE SEWER • FEED ME OR I'LL DIE</p>
+    </div>
+
+    <!-- Web3 Wallet Panel -->
+    <div class="wallet-panel">
+      <button class="btn-connect-wallet" id="btnConnectWallet">CONNECT WEB3 WALLET</button>
+      <div class="wallet-address-display" id="walletAddressDisplay">Status: Wallet Disconnected</div>
+    </div>
+
+    <!-- Live On-Chain Stats -->
+    <div class="stats-grid">
+      <div class="stat-box">
+        <span class="stat-label">VERIFIED TOKENS</span>
+        <span class="stat-value" id="statTokens">0.00</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">LIVE PNL</span>
+        <span class="stat-value" id="statPnl">0.0%</span>
+      </div>
+    </div>
+
+    <!-- Feed / Buy Action Button -->
+    <button class="btn-feed-rat" id="btnFeedRat">🧀 BUY TOKENS & FEED RAT 🧀</button>
+
+    <!-- Rat Stage & Eating Animation Container -->
+    <div class="rat-stage" id="ratStage">
+      <div class="eating-overlay" id="eatingOverlay">
+        <div class="falling-cheese">🧀</div>
+        <div class="chomp-text" id="chompText">CHOMP! TOKENS FED!</div>
+      </div>
+      <div class="rat-graphic-container">
+        <img id="ratImage" src="images/rat-fraud.png" alt="Trench Rat" class="rat-img" />
+      </div>
+      <div class="speech-bubble">
+        <p class="rat-dialogue" id="ratDialogue">"Connect your wallet! I need cheese..."</p>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-section">
+      <div class="progress-header">
+        <span id="phaseTitle">PHASE: UNVERIFIED</span>
+        <span id="progressPercent">0%</span>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-grid">
+      <button class="btn-trench btn-download" id="btnDownload">DOWNLOAD CARD</button>
+      <button class="btn-trench btn-share" id="btnShare">SHARE TO X</button>
+    </div>
+  </div>
+
+  <!-- Wallet Selection Modal -->
+  <div class="modal-overlay" id="walletModal">
+    <div class="modal-box">
+      <h3>SELECT TRENCH WALLET</h3>
+      <p class="modal-sub">Connect extension or mobile Web3 wallet</p>
+
+      <div class="wallet-grid">
+        <button class="wallet-option" data-wallet="metamask">🦊 MetaMask</button>
+        <button class="wallet-option" data-wallet="coinbase">🔵 Coinbase Wallet</button>
+        <button class="wallet-option" data-wallet="trust">🛡️ Trust Wallet</button>
+        <button class="wallet-option" data-wallet="rainbow">🌈 Rainbow</button>
+        <button class="wallet-option" data-wallet="phantom">👻 Phantom (ETH)</button>
+        <button class="wallet-option" data-wallet="zerion">⚡ Zerion</button>
+        <button class="wallet-option" data-wallet="rabby">🐰 Rabby Wallet</button>
+        <button class="wallet-option" data-wallet="robinhood">🏹 Robinhood Wallet</button>
+      </div>
+
+      <button class="modal-close-btn" id="btnCloseModal">CLOSE</button>
+    </div>
+  </div>
+
+  <canvas id="cardCanvas" width="1200" height="630"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>

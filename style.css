@@ -1,0 +1,357 @@
+:root {
+  --sewer-black: #0c0a07;
+  --grime-dark: #1a1610;
+  --rust-orange: #d97706;
+  --toxic-yellow: #eab308;
+  --blood-red: #dc2626;
+  --steel-gray: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+  background-color: var(--sewer-black);
+  background-image: radial-gradient(#1f1a12 1px, transparent 0);
+  background-size: 16px 16px;
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+/* Dirty Sewer Pipe Frame */
+.sewer-frame {
+  background: var(--grime-dark);
+  border: 4px solid var(--rust-orange);
+  box-shadow: 0 0 30px rgba(217, 119, 6, 0.2);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 440px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Header Banner */
+.trench-banner {
+  background: #000000;
+  border: 2px dashed var(--toxic-yellow);
+  padding: 12px 8px;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.main-title {
+  color: var(--toxic-yellow);
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.tagline {
+  color: var(--rust-orange);
+  font-size: 0.68rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* Wallet Panel */
+.wallet-panel {
+  background: #0e0c08;
+  border: 1px solid var(--steel-gray);
+  padding: 12px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-connect-wallet {
+  background: linear-gradient(180deg, #f59e0b, #d97706);
+  color: #000;
+  border: 2px solid #000;
+  padding: 12px;
+  font-weight: 900;
+  font-size: 0.95rem;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+.btn-connect-wallet:hover {
+  background: var(--toxic-yellow);
+}
+
+.wallet-address-display {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.stat-box {
+  background: #0e0c08;
+  border: 1px solid var(--steel-gray);
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--toxic-yellow);
+}
+
+/* Feed / Buy Button */
+.btn-feed-rat {
+  background: linear-gradient(180deg, #eab308, #ca8a04);
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 6px;
+  padding: 14px;
+  font-weight: 900;
+  font-size: 1rem;
+  cursor: pointer;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+  box-shadow: 0 4px 12px rgba(234, 179, 8, 0.3);
+  transition: transform 0.1s ease;
+}
+
+.btn-feed-rat:active {
+  transform: scale(0.97);
+}
+
+/* Rat Stage Area */
+.rat-stage {
+  background: #050403;
+  border: 2px solid var(--steel-gray);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.rat-graphic-container {
+  height: 160px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rat-img {
+  max-height: 150px;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* Eating Animation Overlay */
+.eating-overlay {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.falling-cheese {
+  font-size: 4rem;
+  animation: dropCheese 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes dropCheese {
+  0% { transform: translateY(-20px) scale(0.8); }
+  100% { transform: translateY(10px) scale(1.1); }
+}
+
+.chomp-text {
+  color: var(--toxic-yellow);
+  font-weight: 900;
+  font-size: 1.1rem;
+  margin-top: 8px;
+  text-shadow: 0 0 8px var(--toxic-yellow);
+}
+
+.eating-bounce {
+  animation: ratEatBounce 0.4s ease 3;
+}
+
+@keyframes ratEatBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18) rotate(-3deg); }
+}
+
+.speech-bubble {
+  background: #1f1910;
+  border: 1px solid var(--rust-orange);
+  padding: 10px 14px;
+  border-radius: 6px;
+  width: 100%;
+  text-align: center;
+}
+
+.rat-dialogue {
+  font-size: 0.85rem;
+  color: #fff;
+  font-style: italic;
+}
+
+/* Progress Bar */
+.progress-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: bold;
+}
+
+.progress-bar-track {
+  background: #000;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--steel-gray);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--toxic-yellow);
+  transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+/* Actions */
+.action-grid {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-trench {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  font-weight: 900;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.btn-download {
+  background: var(--toxic-yellow);
+  color: #000;
+}
+
+.btn-share {
+  background: #1da1f2;
+  color: #fff;
+}
+
+/* Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  z-index: 100;
+}
+
+.modal-box {
+  background: var(--grime-dark);
+  border: 2px dashed var(--rust-orange);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 380px;
+  padding: 20px;
+  text-align: center;
+}
+
+.modal-box h3 {
+  color: var(--toxic-yellow);
+  margin-bottom: 4px;
+}
+
+.modal-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.wallet-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.wallet-option {
+  background: #0e0c08;
+  border: 1px solid var(--steel-gray);
+  color: var(--text-main);
+  padding: 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 4px;
+}
+
+.wallet-option:hover {
+  border-color: var(--rust-orange);
+}
+
+.modal-close-btn {
+  background: var(--blood-red);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+canvas {
+  display: none;
+}
