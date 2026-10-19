@@ -355,3 +355,78 @@ body {
 canvas {
   display: none;
 }
+/* --- TRENCH SEWER PIPE & INDUSTRIAL OVERLAY --- */
+
+/* Give your main sewer frame a heavy industrial metal border */
+.sewer-frame {
+  position: relative;
+  border: 6px solid #292524; /* Dark industrial iron */
+  box-shadow: 
+    inset 0 0 20px rgba(0, 0, 0, 0.9),
+    0 0 15px rgba(234, 179, 8, 0.2); /* Subtle toxic yellow glow */
+  background-image: 
+    linear-gradient(rgba(12, 10, 7, 0.95), rgba(12, 10, 7, 0.95)),
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(234, 179, 8, 0.03) 40px, rgba(234, 179, 8, 0.03) 41px);
+}
+
+/* Add "Sewer Pipes" running down the left and right sides */
+.sewer-frame::before,
+.sewer-frame::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  background: repeating-linear-gradient(
+    180deg,
+    #44403c 0px,
+    #44403c 20px,
+    #1c1917 20px,
+    #1c1917 24px,
+    #78716c 24px,
+    #78716c 26px
+  );
+  z-index: 10;
+  opacity: 0.8;
+}
+
+.sewer-frame::before {
+  left: -18px; /* Left pipe */
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.sewer-frame::after {
+  right: -18px; /* Right pipe */
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+/* Animated toxic slime effect behind the rat stage */
+@keyframes sewerFlow {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100px; }
+}
+
+.rat-stage {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle, rgba(20, 83, 45, 0.15) 0%, rgba(12, 10, 7, 1) 80%);
+  border: 1px dashed #166534;
+}
+
+.rat-stage::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #22c55e, transparent);
+  animation: slimePulse 2s infinite ease-in-out;
+}
+
+@keyframes slimePulse {
+  0%, 100% { opacity: 0.3; transform: scaleX(0.8); }
+  50% { opacity: 1; transform: scaleX(1); }
+}
